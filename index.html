@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard.css — Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════ SIDEBAR ══════════════════════════ -->
+<aside>
+  <a href="#">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="6" fill="#1d6bf3"/>
+      <path d="M7 17L12 7L17 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 14h6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    Dashboard.css
+  </a>
+
+  <ul>
+    <li><small>Overview</small></li>
+    <li><a href="#" aria-current>Home</a></li>
+    <li><a href="#">Analytics</a></li>
+
+    <li><small>Manage</small></li>
+    <li>
+      <span>Users</span>
+      <ul>
+        <li><a href="#">All Users</a></li>
+        <li><a href="#">Roles</a></li>
+        <li><a href="#">Invitations</a></li>
+      </ul>
+    </li>
+    <li>
+      <span>Content</span>
+      <ul>
+        <li><a href="#">Posts</a></li>
+        <li><a href="#">Media</a></li>
+        <li><a href="#">Tags</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Orders</a></li>
+    <li><a href="#">Reports</a></li>
+
+    <li><small>System</small></li>
+    <li><a href="#">Settings</a></li>
+    <li><a href="#">Logs</a></li>
+  </ul>
+
+  <button onclick="document.body.classList.toggle('toggle-sidebar')">✕</button>
+</aside>
+
+<!-- ══════════════════════════ MAIN ══════════════════════════ -->
+<main>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <rect width="24" height="24" rx="6" fill="#1d6bf3"/>
+        <path d="M7 17L12 7L17 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 14h6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Dashboard.css
+    </a>
+
+    <button aria-label="Toggle menu" onclick="this.parentElement.classList.toggle('toggle-navbar')">☰</button>
+
+    <ul>
+      <li>
+        <a href="#">Products ▾</a>
+        <ul>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Automation</a></li>
+          <li><a href="#">Integrations</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Resources ▾</a>
+        <ul>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Get started →</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header>
+    <h1>Overview</h1>
+    <button type="reset" onclick="document.body.classList.toggle('toggle-sidebar')">☰ Sidebar</button>
+  </header>
+
+  <!-- STAT CARDS -->
+  <div>
+    <article>
+      <h3>Total Users</h3>
+      <strong>24,521</strong>
+      <small data-variant="success">↑ 12% this month</small>
+    </article>
+    <article>
+      <h3>Revenue</h3>
+      <strong>$84,320</strong>
+      <small data-variant="success">↑ 8.4% this month</small>
+    </article>
+    <article>
+      <h3>Active Sessions</h3>
+      <strong>1,204</strong>
+      <small data-variant="success">↑ 3.1% today</small>
+    </article>
+    <article>
+      <h3>Churn Rate</h3>
+      <strong>2.4%</strong>
+      <small data-variant="danger">↑ 0.3% vs last month</small>
+    </article>
+  </div>
+
+  <!-- USERS TABLE -->
+  <section>
+    <header>
+      <h3>Users</h3>
+      <input type="search" placeholder="Search users…" oninput="
+        const q = this.value.toLowerCase();
+        this.closest('section').querySelectorAll('tbody tr').forEach(r =>
+          r.hidden = !r.textContent.toLowerCase().includes(q)
+        );
+      " />
+      <select onchange="
+        const v = this.value;
+        this.closest('section').querySelectorAll('tbody tr').forEach(r =>
+          r.hidden = v ? r.querySelector('mark')?.textContent.trim() !== v : false
+        );
+      ">
+        <option value="">All statuses</option>
+        <option>Active</option>
+        <option>Pending</option>
+        <option>Inactive</option>
+      </select>
+      <button>+ Add user</button>
+    </header>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Joined</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice Nakamura</td>
+            <td>alice@acme.io</td>
+            <td>Admin</td>
+            <td><mark data-variant="success" data-shape="pill">Active</mark></td>
+            <td>Jan 12, 2024</td>
+            <td>
+              <button type="reset">Edit</button>
+              <button data-variant="danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Bob Okafor</td>
+            <td>bob@acme.io</td>
+            <td>Editor</td>
+            <td><mark data-variant="warning" data-shape="pill">Pending</mark></td>
+            <td>Feb 3, 2024</td>
+            <td>
+              <button type="reset">Edit</button>
+              <button data-variant="danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Carla Reyes</td>
+            <td>carla@acme.io</td>
+            <td>Viewer</td>
+            <td><mark data-variant="accent" data-shape="pill">Active</mark></td>
+            <td>Mar 7, 2024</td>
+            <td>
+              <button type="reset">Edit</button>
+              <button data-variant="danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>David Müller</td>
+            <td>david@acme.io</td>
+            <td>Editor</td>
+            <td><mark data-variant="danger" data-shape="pill">Inactive</mark></td>
+            <td>Mar 18, 2024</td>
+            <td>
+              <button type="reset">Edit</button>
+              <button data-variant="danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Eva Lindström</td>
+            <td>eva@acme.io</td>
+            <td>Admin</td>
+            <td><mark data-variant="success" data-shape="pill">Active</mark></td>
+            <td>Apr 2, 2024</td>
+            <td>
+              <button type="reset">Edit</button>
+              <button data-variant="danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <footer>
+      <span>5 users</span>
+      <nav>
+        <button disabled>‹</button>
+        <button aria-current onclick="
+          this.closest('nav').querySelectorAll('button').forEach(b => b.removeAttribute('aria-current'));
+          this.setAttribute('aria-current','true');
+        ">1</button>
+        <button onclick="
+          this.closest('nav').querySelectorAll('button').forEach(b => b.removeAttribute('aria-current'));
+          this.setAttribute('aria-current','true');
+        ">2</button>
+        <button onclick="
+          this.closest('nav').querySelectorAll('button').forEach(b => b.removeAttribute('aria-current'));
+          this.setAttribute('aria-current','true');
+        ">3</button>
+        <button>›</button>
+      </nav>
+    </footer>
+  </section>
+
+  <!-- ELEMENTS REFERENCE -->
+  <section>
+    <h2>Elements Reference</h2>
+    <hr>
+
+    <h3>Typography</h3>
+    <p>Use <code>&lt;mark&gt;</code> for inline badges. Keyboard shortcuts: <kbd>⌘</kbd> + <kbd>K</kbd>. <abbr title="Cascading Style Sheets">CSS</abbr> only — no classes.</p>
+
+    <blockquote>
+      <p>A clean interface is not just visual — it's a philosophy of intent.</p>
+      <footer>— Dashboard.css Docs</footer>
+    </blockquote>
+    <blockquote data-variant="warning">
+      <p><strong>Warning:</strong> This action cannot be undone.</p>
+    </blockquote>
+    <blockquote data-variant="danger">
+      <p><strong>Error:</strong> Failed to connect to the database.</p>
+    </blockquote>
+    <blockquote data-variant="success">
+      <p><strong>Success:</strong> Deployment completed in 3.2s.</p>
+    </blockquote>
+
+    <pre><code>/* classless — just write HTML */
+section:has(table) > div {
+  overflow-x: auto;
+}</code></pre>
+
+    <hr>
+
+    <h3>Badges</h3>
+    <p>
+      <mark>default</mark>&nbsp;
+      <mark data-variant="success">success</mark>&nbsp;
+      <mark data-variant="danger">danger</mark>&nbsp;
+      <mark data-variant="warning">warning</mark>&nbsp;
+      <mark data-variant="info">info</mark>&nbsp;
+      <mark data-variant="accent">accent</mark>&nbsp;
+      <mark data-variant="success" data-shape="pill">pill</mark>&nbsp;
+      <mark data-variant="danger"  data-shape="pill">pill</mark>
+    </p>
+
+    <hr>
+
+    <h3>Buttons</h3>
+    <p>
+      <button>Primary</button>&nbsp;
+      <button type="reset">Secondary</button>&nbsp;
+      <button type="button">Neutral</button>&nbsp;
+      <button data-variant="danger">Danger</button>&nbsp;
+      <button data-variant="success">Success</button>&nbsp;
+      <button data-variant="ghost">Ghost</button>&nbsp;
+      <button disabled>Disabled</button>
+    </p>
+
+    <hr>
+
+    <h3>Progress &amp; Meter</h3>
+    <label>Storage used
+      <progress value="68" max="100"></progress>
+    </label>
+    <label>Satisfaction score
+      <meter value="0.75" min="0" max="1" low="0.3" high="0.7" optimum="1"></meter>
+    </label>
+
+    <hr>
+
+    <h3>Details &amp; Summary</h3>
+    <details>
+      <summary>What is Dashboard.css?</summary>
+      <p>A classless CSS framework for dashboards. No class names, no IDs — style via semantic HTML and <code>data-variant</code> attributes.</p>
+    </details>
+    <details>
+      <summary>How do variants work?</summary>
+      <p>Add <code>data-variant="success|danger|warning|info|accent"</code> to <code>&lt;mark&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;blockquote&gt;</code>, or <code>&lt;small&gt;</code>.</p>
+    </details>
+    <details open>
+      <summary>Is it responsive?</summary>
+      <p>Yes. Sidebar collapses on mobile, nav shows a hamburger, cards reflow via auto-fill grid, and the table scrolls horizontally inside its wrapper.</p>
+    </details>
+
+    <hr>
+
+    <h3>Figure &amp; Figcaption</h3>
+    <figure>
+      <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" width="100%">
+        <rect width="600" height="160" fill="#f7f7f5"/>
+        <polyline
+          points="0,130 60,105 120,115 180,70 240,80 300,45 360,60 420,28 480,40 540,18 600,30"
+          fill="none" stroke="#1d6bf3" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline
+          points="0,130 60,105 120,115 180,70 240,80 300,45 360,60 420,28 480,40 540,18 600,30 600,160 0,160"
+          fill="rgba(29,107,243,0.07)" stroke="none"/>
+      </svg>
+      <figcaption>Fig. 1 — Monthly active users over the past 12 months.</figcaption>
+    </figure>
+
+    <hr>
+
+    <h3>Definition List</h3>
+    <dl>
+      <dt>Version</dt><dd>1.0.0</dd>
+      <dt>License</dt><dd>MIT</dd>
+      <dt>Dependencies</dt><dd>None</dd>
+    </dl>
+
+    <hr>
+
+    <h3>Form</h3>
+    <article>
+      <header><h3>Edit User</h3></header>
+      <section>
+        <form>
+          <div>
+            <label>First name <input type="text" placeholder="Alice" /></label>
+            <label>Last name  <input type="text" placeholder="Nakamura" /></label>
+          </div>
+          <label>Email <input type="email" placeholder="alice@acme.io" /></label>
+          <label>Role
+            <select>
+              <option>Admin</option>
+              <option>Editor</option>
+              <option>Viewer</option>
+            </select>
+          </label>
+          <label>Bio <textarea placeholder="Short bio…"></textarea></label>
+          <fieldset>
+            <legend>Notifications</legend>
+            <label><input type="checkbox" checked /> Email alerts</label>
+            <label><input type="checkbox" /> SMS alerts</label>
+            <label><input type="radio" name="freq" checked /> Daily digest</label>
+            <label><input type="radio" name="freq" /> Weekly digest</label>
+          </fieldset>
+          <label>Confidence level <input type="range" min="0" max="100" value="70" /></label>
+          <label>Accent color <input type="color" value="#1d6bf3" /></label>
+          <div>
+            <button type="submit">Save changes</button>
+            <button type="reset">Reset</button>
+          </div>
+        </form>
+      </section>
+    </article>
+
+  </section>
+
+</main>
+</body>
+</html>
